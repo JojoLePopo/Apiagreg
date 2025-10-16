@@ -1,6 +1,9 @@
 import requests
 import json
 from apikey import RANDOMMER_API_KEY as randommer_api_key
+from flask import Flask, jsonify
+
+app = Flask(__name__)
 
 HEADERS = {"X-Api-Key": randommer_api_key}
 
@@ -18,17 +21,11 @@ def get_random_user():
 
 
 def get_random_credit_card():
-    # correction : endpoint valide pour Randommer
-    response = requests.get("https://randommer.io/api/Finance/CreditCard", headers=HEADERS)
+    response = requests.get("https://randommer.io/api/Card", headers=HEADERS, params={"type": "Visa"})
     try:
-        data = response.json()[0]
-        return {
-            "card_number": data["cardNumber"],
-            "card_type": data["type"],
-            "expiration_date": data["expDate"],
-            "cvv": data["cvv"]
-        }
-    except Exception:
+        data = response.json()
+        return data[0] if isinstance(data, list) and len(data) > 0 else None
+    except ValueError:
         return None
 
 
@@ -68,7 +65,8 @@ def get_joke():
     }
 
 
-def main():
+
+def get_complete_profile():
     user = get_random_user()
     phone_number = get_phone_number()
     iban = get_iban()
@@ -86,7 +84,14 @@ def main():
     }
 
     print(json.dumps(profile, indent=2, ensure_ascii=False))
+    return profile
+
+@app.route("/get-complete-profile", methods=["GET"])
+def api_get_complete_profile():
+    data = get_complete_profile()
+    print("✅ Profil généré :", data)
+    return jsonify(data)
 
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)
