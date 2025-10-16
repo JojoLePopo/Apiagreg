@@ -92,7 +92,11 @@ const Server = class Server {
       this.security();
       this.middleware();
       this.routes();
-      this.app.listen(this.config.port);
+      this.app.listen(this.config.port, () => {
+        console.log(`[SERVER] Listening on port ${this.config.port}`);
+      }).on('error', (err) => {
+        console.error('[SERVER] listen error ->', err);
+      });
     } catch (err) {
       console.error(`[ERROR] Server -> ${err}`);
     }
