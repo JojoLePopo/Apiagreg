@@ -70,6 +70,8 @@ const Server = class Server {
 
   routes() {
     new routes.Users(this.app, this.connect);
+    // Register main endpoint exposing the aggregated random data
+    new routes.Main(this.app);
 
     this.app.use((req, res) => {
       res.status(404).json({
