@@ -3,12 +3,8 @@ try {
 } catch (e) {
 }
 
-const RANDOMMER_API_KEY = process.env.RANDOMMER_API_KEY;
-if (!RANDOMMER_API_KEY) {
-  console.error('Missing RANDOMMER_API_KEY environment variable. Set it in your shell or in a .env file.');
-  process.exitCode = 1;
-}
-
+// NOTE: clé insérée directement par l'utilisateur (non recommandé pour la production).
+const RANDOMMER_API_KEY = "9972b6e41a37489890db8a6f25933ee3";
 const RM_HEADERS = { "X-Api-Key": RANDOMMER_API_KEY };
 
 
