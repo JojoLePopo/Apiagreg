@@ -97,7 +97,9 @@ const Server = class Server {
       this.middleware();
       this.routes();
       this.app.listen(this.config.port, () => {
-        console.log(`[SERVER] Listening on port ${this.config.port}`);
+        const msg = `[SERVER] Listening on port ${this.config.port}`;
+        console.log(msg);
+        try { require('fs').writeFileSync('.server_started', msg); } catch (e) {}
       }).on('error', (err) => {
         console.error('[SERVER] listen error ->', err);
       });
