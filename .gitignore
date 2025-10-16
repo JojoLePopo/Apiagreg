@@ -1,0 +1,2 @@
+# Ignorer le fichier local de secrets contenant la clé API
+secrets.py
