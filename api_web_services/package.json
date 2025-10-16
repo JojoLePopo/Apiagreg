@@ -1,0 +1,14 @@
+{
+  "name": "api_web_services",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TP pipeline",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "dev": "node --watch main.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
