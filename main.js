@@ -3,7 +3,6 @@ try {
 } catch (e) {
 }
 
-// NOTE: clé insérée directement par l'utilisateur (non recommandé pour la production).
 const RANDOMMER_API_KEY = "9972b6e41a37489890db8a6f25933ee3";
 const RM_HEADERS = { "X-Api-Key": RANDOMMER_API_KEY };
 
