@@ -88,7 +88,11 @@ const Server = class Server {
 
   async run() {
     try {
-      await this.dbConnect();
+      if (!process.env.SKIP_DB) {
+        await this.dbConnect();
+      } else {
+        console.log('[SERVER] SKIP_DB set, skipping database connection');
+      }
       this.security();
       this.middleware();
       this.routes();
